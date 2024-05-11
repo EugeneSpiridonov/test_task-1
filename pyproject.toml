@@ -10,6 +10,8 @@ packages = [{include = "test_task_1"}]
 python = "^3.11"
 aiohttp = "^3.9.5"
 click = "^8.1.7"
+pytest-asyncio = "^0.23.6"
+pytest-aiohttp = "^1.0.5"
 
 
 [build-system]
