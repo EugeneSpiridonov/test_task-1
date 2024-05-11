@@ -2,10 +2,12 @@ from aiohttp import web
 import hashlib
 
 
+# Первое задание
 async def healthcheck(request):
     return web.json_response({})
 
 
+# Второе задание
 async def hash_string(request):
     try:
         data = await request.json()
@@ -19,9 +21,10 @@ async def hash_string(request):
         return web.json_response({"hash_string": hashed_string})
 
     except Exception as e:
-        return web.json_response({"error": str(e)}, status=500)
+        return web.json_response({"Ошибка": str(e)}, status=500)
 
 
+# Функция для создания роутов и объекта приложения
 def create_app():
     app = web.Application()
     app.router.add_get("/healthcheck", healthcheck)
@@ -29,6 +32,7 @@ def create_app():
     return app
 
 
+# Точка входа в приложение для внешнего импорта
 def run_app(host="127.0.0.1", port=8080):
     app = create_app()
     web.run_app(app, host=host, port=port)
