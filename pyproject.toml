@@ -9,6 +9,7 @@ packages = [{include = "test_task_1"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 aiohttp = "^3.9.5"
+click = "^8.1.7"
 
 
 [build-system]

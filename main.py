@@ -1,30 +1,13 @@
-from aiohttp import web
-import hashlib
+import click
+from server import run_app
 
 
-async def healthcheck(request):
-    return web.json_response({})
+@click.command()
+@click.option("--host", default="127.0.0.1", help="Host IP")
+@click.option("--port", default=8080, help="Port number")
+def main(host, port):
+    run_app(host, port)
 
-
-async def hash_string(request):
-    try:
-        data = await request.json()
-        string_to_hash = data.get("string")
-        if string_to_hash is None:
-            return web.json_response(
-                {"validation_errors": 'Требуется поле "string"'}, status=400
-            )
-
-        hashed_string = hashlib.sha256(string_to_hash.encode()).hexdigest()
-        return web.json_response({"hash_string": hashed_string})
-
-    except Exception as e:
-        return web.json_response({"error": str(e)}, status=500)
-
-
-app = web.Application()
-app.router.add_get("/healthcheck", healthcheck)
-app.router.add_post("/hash", hash_string)
 
 if __name__ == "__main__":
-    web.run_app(app, host="127.0.0.1")
+    main()
